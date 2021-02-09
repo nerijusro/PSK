@@ -6,6 +6,9 @@ import java.io.Serializable;
 import java.util.Objects;
 
 @Entity
+@NamedQueries({
+        @NamedQuery(name = "City.findAll", query = "select a from City as a")
+})
 @Table(name = "CITY")
 public class City implements Serializable {
 
