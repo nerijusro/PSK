@@ -15,7 +15,7 @@ public class Country implements Serializable{
     public Country(){
     }
 
-    public Country(String name, List<City> cities = null, City capitalCity = null){
+    public Country(String name, List<City> cities, City capitalCity){
         this.name = name;
         this.cities = cities;
 
@@ -42,7 +42,7 @@ public class Country implements Serializable{
     }
 
     public void addNeighbour(Country neighbour){
-        this.neighbours.Add(neighbour);
+        this.neighbours.add(neighbour);
     }
 
     public List<City> getCities() {
@@ -55,7 +55,7 @@ public class Country implements Serializable{
     }
 
     public void addCity(City city){
-        this.cities.Add(city);
+        this.cities.add(city);
     }
 
     public City getCapitalCity(){
