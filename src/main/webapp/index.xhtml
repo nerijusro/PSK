@@ -12,5 +12,9 @@
             <ui:debug />
         </ui:repeat>
     </ol>
+    <h:form>
+        <h:inputText value="#{cities.cityToCreate.name}" required="true" />
+        <h:commandButton value="Add new city" action="#{cities.createCity}" />
+    </h:form>
 </h:body>
 </html>

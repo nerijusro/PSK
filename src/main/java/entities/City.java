@@ -20,11 +20,9 @@ public class City implements Serializable {
     @Column(name = "NAME")
     private String name;
 
-    @Size(max = 50)
     @Column(name = "COUNTRY")
     private Country country;
 
-    @Size(max = 50)
     @Column(name = "ISCAPITAL")
     private boolean isCapital;
 
