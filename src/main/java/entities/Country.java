@@ -8,6 +8,10 @@ import java.util.List;
 //Add remove city. neighbour.
 
 @Entity
+@NamedQueries({
+        @NamedQuery(name = "Country.findAll", query = "select a from Country as a"),
+        @NamedQuery(name = "Country.getCities", query = "select a from City a where a.name = :name")
+})
 @Table(name = "COUNTRY")
 public class Country {
 

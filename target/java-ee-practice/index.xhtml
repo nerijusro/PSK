@@ -2,19 +2,40 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core">
 <h:head/>
 <h:body>
-    <h2>Cities:</h2>
-    <ol>
-        <ui:repeat value="#{cities.allCities}" var="city">
-            <li>#{city.name}</li>
-            <ui:debug />
-        </ui:repeat>
-    </ol>
-    <h:form>
-        <h:inputText value="#{cities.cityToCreate.name}" required="true" />
-        <h:commandButton value="Add new city" action="#{cities.createCity}" />
-    </h:form>
+    <table style="width:100%">
+        <tr>
+            <th>
+                <h:form>
+                    <label for="addCountryInput">Add Country: </label>
+                    <h:inputText value="#{countries.countryToCreate.name}" id="addCountryInput" required="true" />
+                    <h:commandButton value="Add new country" action="#{countries.createCountry}" />
+                </h:form>
+            </th>
+            <th>
+                <h:form>
+                    <label for="addCityInput">Add City: </label>
+                    <h:inputText value="#{cities.cityToCreate.name}" id="addCityInput" required="true" />
+                    <br/>
+                    <label for="countryDropdown">City will be located in </label>
+                    <h:selectOneMenu>
+                        <f:selectItems value="#{countries.allCountries}" var="entry" itemLabel="#{entry.name}" id="countryDropdown" required="true"/>
+                    </h:selectOneMenu>
+                    <br/>
+                    <h:commandButton value="Add new city" action="#{cities.createCity}" />
+                </h:form>
+            </th>
+        </tr>
+    </table>
+
+    <ui:repeat value="#{countries.allCountries}" var="country">
+        <tr>
+            <th><h:outputText value="#{country.name}"/></th>
+            <th><h:outputText value="#{country.capitalCity}"/></th>
+        </tr>
+    </ui:repeat>
 </h:body>
 </html>
