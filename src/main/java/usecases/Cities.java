@@ -8,12 +8,16 @@ import java.io.Serializable;
 import java.util.List;
 import entities.City;
 import persistence.CitiesDAO;
+import persistence.CountriesDAO;
 
 @Model
 public class Cities implements Serializable {
 
     @Inject
     private CitiesDAO citiesDAO;
+
+    @Inject
+    private CountriesDAO countriesDAO;
 
     private City cityToCreate = new City();
 

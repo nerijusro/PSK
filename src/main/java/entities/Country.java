@@ -22,12 +22,16 @@ public class Country {
     private List<Country> neighbours = new ArrayList<>();
 
     @OneToMany(mappedBy = "country")
-    private List<City> cities;
+    private List<City> cities = new ArrayList<>();
 
     @OneToOne
     private City capitalCity;
 
     public Country(){
+    }
+
+    public Country(String name){
+        this.name = name;
     }
 
     public Country(String name, List<City> cities, City capitalCity){
