@@ -2,7 +2,6 @@ package entities;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
-import java.io.Serializable;
 import java.util.Objects;
 
 @Entity
@@ -10,7 +9,7 @@ import java.util.Objects;
         @NamedQuery(name = "City.findAll", query = "select a from City as a")
 })
 @Table(name = "CITY")
-public class City implements Serializable {
+public class City {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,10 +19,11 @@ public class City implements Serializable {
     @Column(name = "NAME")
     private String name;
 
-    @Column(name = "COUNTRY")
+    @ManyToOne
+    @JoinColumn(name="COUNTRY_ID")
     private Country country;
 
-    @Column(name = "ISCAPITAL")
+    @Column(name = "IS_CAPITAL")
     private boolean isCapital;
 
     public City() {

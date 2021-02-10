@@ -1,15 +1,30 @@
 package entities;
 
-import java.io.Serializable;
+import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 //TODO:
 //Add remove city. neighbour.
-public class Country implements Serializable{
+
+@Entity
+@Table(name = "COUNTRY")
+public class Country {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private String id;
 
     private String name;
-    private List<Country> neighbours;
+
+    @ManyToMany
+    @JoinTable(name = "NEIGHBOURS")
+    private List<Country> neighbours = new ArrayList<>();
+
+    @OneToMany(mappedBy = "country")
     private List<City> cities;
+
+    @OneToOne
     private City capitalCity;
 
     public Country(){
@@ -23,6 +38,14 @@ public class Country implements Serializable{
         //Country must have a capital.
         //Validate if capitalCity is among the cities.
         this.capitalCity = capitalCity;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getName(){
