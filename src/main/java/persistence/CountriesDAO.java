@@ -10,6 +10,7 @@ import java.util.List;
 
 @ApplicationScoped
 public class CountriesDAO {
+
     @PersistenceContext
     private EntityManager em;
 
@@ -19,11 +20,27 @@ public class CountriesDAO {
 
     public List<City> getCities(){ return em.createNamedQuery("Country.getCities", City.class).getResultList(); }
 
-    public void setEm(EntityManager em) {
-        this.em = em;
+    private City getCapitalCity(){ return em.createNamedQuery("Country.getCapitalCity", City.class).getSingleResult(); }
+
+    private void resetCapitalCity(){
+        City oldCapital = this.getCapitalCity();
+        oldCapital.unsetAsCapital();
+
+        em.merge(oldCapital);
+    }
+
+    public City updateCapital(City newCapital){
+        this.resetCapitalCity();
+
+        newCapital.setAsCapital();
+        return em.merge(newCapital);
     }
 
     public void persist(Country city){
         this.em.persist(city);
+    }
+
+    public Country findOne(Integer id) {
+        return em.find(Country.class, id);
     }
 }

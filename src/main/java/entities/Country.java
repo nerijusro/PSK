@@ -1,8 +1,12 @@
 package entities;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 //TODO:
 //Add remove city. neighbour.
@@ -10,14 +14,20 @@ import java.util.List;
 @Entity
 @NamedQueries({
         @NamedQuery(name = "Country.findAll", query = "select a from Country as a"),
-        @NamedQuery(name = "Country.getCities", query = "select a from City a where a.name = :name")
+        @NamedQuery(name = "Country.getCities", query = "select a from City a where a.name = :name"),
+        @NamedQuery(name = "Country.getCapitalCity", query = "select a from City a where a.isCapital = true")
 })
 @Table(name = "COUNTRY")
+@Getter @Setter
 public class Country {
 
+    public Country(){
+        
+    }
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String id;
+    private Integer id;
 
     private String name;
 
@@ -25,77 +35,57 @@ public class Country {
     @JoinTable(name = "NEIGHBOURS")
     private List<Country> neighbours = new ArrayList<>();
 
-    @OneToMany(mappedBy = "country")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "country")
     private List<City> cities = new ArrayList<>();
 
     @OneToOne
     private City capitalCity;
 
-    public Country(){
+//    public List<Country> getNeighbours(){
+//        return neighbours;
+//    }
+//
+//    public void setNeighbours(List<Country> neighbours){
+//        this.neighbours = neighbours;
+//    }
+//
+//    public void addNeighbour(Country neighbour){
+//        this.neighbours.add(neighbour);
+//    }
+//
+//    public List<City> getCities() {
+//        return this.cities;
+//    }
+//
+//    public void setCities(List<City> cities, City capitalCity){
+//        this.cities = cities;
+//        this.capitalCity = capitalCity;
+//    }
+//
+//    public void addCity(City city){
+//        this.cities.add(city);
+//    }
+//
+//    public City getCapitalCity(){
+//        return this.capitalCity;
+//    }
+//
+//    public void setCapitalCity(City city){
+//        //TODO:
+//        //Validate if the new capital is in cities list.
+//        this.capitalCity = city;
+//    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Country team = (Country) o;
+        return Objects.equals(name, team.name);
     }
 
-    public Country(String name){
-        this.name = name;
-    }
-
-    public Country(String name, List<City> cities, City capitalCity){
-        this.name = name;
-        this.cities = cities;
-
-        //TODO:
-        //Country must have a capital.
-        //Validate if capitalCity is among the cities.
-        this.capitalCity = capitalCity;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getName(){
-        return name;
-    }
-
-    public void setName(String name){
-        this.name = name;
-    }
-
-    public List<Country> getNeighbours(){
-        return neighbours;
-    }
-
-    public void setNeighbours(List<Country> neighbours){
-        this.neighbours = neighbours;
-    }
-
-    public void addNeighbour(Country neighbour){
-        this.neighbours.add(neighbour);
-    }
-
-    public List<City> getCities() {
-        return this.cities;
-    }
-
-    public void setCities(List<City> cities, City capitalCity){
-        this.cities = cities;
-        this.capitalCity = capitalCity;
-    }
-
-    public void addCity(City city){
-        this.cities.add(city);
-    }
-
-    public City getCapitalCity(){
-        return this.capitalCity;
-    }
-
-    public void setCapitalCity(City city){
-        //TODO:
-        //Validate if the new capital is in cities list.
-        this.capitalCity = city;
+    @Override
+    public int hashCode() {
+        return Objects.hash(name);
     }
 }

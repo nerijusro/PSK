@@ -1,6 +1,7 @@
 package persistence;
 
 import entities.City;
+import entities.Country;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.persistence.EntityManager;
@@ -22,5 +23,9 @@ public class CitiesDAO {
 
     public void persist(City city){
         this.em.persist(city);
+    }
+
+    public City findOne(Integer id) {
+        return em.find(City.class, id);
     }
 }

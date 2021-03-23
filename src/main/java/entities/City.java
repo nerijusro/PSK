@@ -1,5 +1,8 @@
 package entities;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
 import javax.validation.constraints.Size;
 import java.util.Objects;
@@ -9,6 +12,7 @@ import java.util.Objects;
         @NamedQuery(name = "City.findAll", query = "select a from City as a")
 })
 @Table(name = "CITY")
+@Getter @Setter
 public class City {
 
     @Id
@@ -28,42 +32,6 @@ public class City {
 
     public City() {
         isCapital = false;
-    }
-
-    public City(String name) {
-        this.isCapital = false;
-        this.name = name;
-    }
-
-    public City(String name, Country country, boolean isCapital) {
-        this.name = name;
-        this.country = country;
-        this.isCapital = isCapital;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Country getCountry(){
-        return this.country;
-    }
-
-    public void setCountry(Country country, boolean isCapital){
-        this.isCapital = isCapital;
-        this.country = country;
     }
 
     public boolean isCapital(){

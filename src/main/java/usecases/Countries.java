@@ -2,23 +2,26 @@ package usecases;
 
 import entities.City;
 import entities.Country;
+import lombok.Getter;
+import lombok.Setter;
 import persistence.CountriesDAO;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.inject.Model;
 import javax.inject.Inject;
 import javax.transaction.Transactional;
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 @Model
-public class Countries implements Serializable {
+public class Countries {
     @Inject
     private CountriesDAO countriesDAO;
 
+    @Getter @Setter
     private Country countryToCreate = new Country();
 
+    @Getter
     private List<Country> allCountries = new ArrayList<>();
 
     @PostConstruct
@@ -30,26 +33,20 @@ public class Countries implements Serializable {
         this.allCountries = countriesDAO.loadAll();
     }
 
-    public List<Country> getAllCountries(){
-        return allCountries;
-    }
-
     @Transactional
     public String createCountry(){
+        City city = new City();
+        city.setName("Mazeikiai");
+        List<City> cities = new ArrayList<City>();
+        cities.add(city);
+
+        countryToCreate.setCities(cities);
+
         this.countriesDAO.persist(countryToCreate);
         return "success";
     }
 
-    @Transactional
     public List<City> getCities(){
         return countriesDAO.getCities();
-    }
-
-    public Country getCountryToCreate() {
-        return countryToCreate;
-    }
-
-    public void setCountryToCreate(Country countryToCreate) {
-        this.countryToCreate = countryToCreate;
     }
 }
