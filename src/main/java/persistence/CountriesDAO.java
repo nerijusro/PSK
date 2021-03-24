@@ -57,9 +57,11 @@ public class CountriesDAO {
         return em.merge(newCapital);
     }
 
-    public void persist(Country city){
-        this.em.persist(city);
+    public void persist(Country country){
+        this.em.persist(country);
     }
+
+    public void merge(Country country) { this.em.merge(country); }
 
     public Country findOne(Integer id) {
         return em.find(Country.class, id);

@@ -11,7 +11,6 @@ import java.util.Objects;
 @Entity
 @NamedQueries({
         @NamedQuery(name = "Country.findAll", query = "select a from Country as a"),
-        @NamedQuery(name = "Country.getCities", query = "select a from City a where a.name = :name"),
         @NamedQuery(name = "Country.getCapitalCity", query = "select a from City a where a.isCapital = true and a.country.id = :id")
 })
 @Table(name = "COUNTRY")
@@ -28,7 +27,7 @@ public class Country {
 
     private String name;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "NEIGHBOURS")
     private List<Country> neighbours = new ArrayList<>();
 

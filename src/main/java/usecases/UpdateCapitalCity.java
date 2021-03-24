@@ -39,6 +39,10 @@ public class UpdateCapitalCity implements Serializable {
 
     @Transactional
     public String updateCapitalCity(){
+        if (newCapitalCity == null){
+            return "updateCapital?faces-redirect=true&countryId=" + this.country.getId();
+        }
+
         countriesDAO.updateCapital(newCapitalCity);
         return "cities?faces-redirect=true&countryId=" + this.country.getId();
     }
