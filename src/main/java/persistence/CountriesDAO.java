@@ -18,21 +18,42 @@ public class CountriesDAO {
         return em.createNamedQuery("Country.findAll", Country.class).getResultList();
     }
 
-    public List<City> getCities(){ return em.createNamedQuery("Country.getCities", City.class).getResultList(); }
+    private City getCapitalCity(Country country){
+        List<City> capitalCity = em.createNamedQuery("Country.getCapitalCity", City.class).setParameter("id", country.getId()).getResultList();
+        if(capitalCity.isEmpty()){
+            return null;
+        }
 
-    private City getCapitalCity(){ return em.createNamedQuery("Country.getCapitalCity", City.class).getSingleResult(); }
+        return capitalCity.get(0);
+    }
 
-    private void resetCapitalCity(){
-        City oldCapital = this.getCapitalCity();
+    private void resetCapitalCity(Country country){
+        City oldCapital = country.getCapitalCity();
+
         oldCapital.unsetAsCapital();
-
         em.merge(oldCapital);
     }
 
+    private boolean hasCapitalCity(Country country){
+        City oldCapital = this.getCapitalCity(country);
+        if(oldCapital != null) {
+            return true;
+        }
+
+        return false;
+    }
+
     public City updateCapital(City newCapital){
-        this.resetCapitalCity();
+        Country country = findOne(newCapital.getCountry().getId());
+        boolean isCapitalCitySet = hasCapitalCity(country);
+
+        if(isCapitalCitySet){
+            resetCapitalCity(country);
+        }
 
         newCapital.setAsCapital();
+        country.setCapitalCity(newCapital);
+        em.merge(country);
         return em.merge(newCapital);
     }
 

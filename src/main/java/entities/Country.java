@@ -8,14 +8,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-//TODO:
-//Add remove city. neighbour.
-
 @Entity
 @NamedQueries({
         @NamedQuery(name = "Country.findAll", query = "select a from Country as a"),
         @NamedQuery(name = "Country.getCities", query = "select a from City a where a.name = :name"),
-        @NamedQuery(name = "Country.getCapitalCity", query = "select a from City a where a.isCapital = true")
+        @NamedQuery(name = "Country.getCapitalCity", query = "select a from City a where a.isCapital = true and a.country.id = :id")
 })
 @Table(name = "COUNTRY")
 @Getter @Setter
@@ -40,41 +37,6 @@ public class Country {
 
     @OneToOne
     private City capitalCity;
-
-//    public List<Country> getNeighbours(){
-//        return neighbours;
-//    }
-//
-//    public void setNeighbours(List<Country> neighbours){
-//        this.neighbours = neighbours;
-//    }
-//
-//    public void addNeighbour(Country neighbour){
-//        this.neighbours.add(neighbour);
-//    }
-//
-//    public List<City> getCities() {
-//        return this.cities;
-//    }
-//
-//    public void setCities(List<City> cities, City capitalCity){
-//        this.cities = cities;
-//        this.capitalCity = capitalCity;
-//    }
-//
-//    public void addCity(City city){
-//        this.cities.add(city);
-//    }
-//
-//    public City getCapitalCity(){
-//        return this.capitalCity;
-//    }
-//
-//    public void setCapitalCity(City city){
-//        //TODO:
-//        //Validate if the new capital is in cities list.
-//        this.capitalCity = city;
-//    }
 
     @Override
     public boolean equals(Object o) {

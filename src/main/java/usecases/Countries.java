@@ -1,6 +1,5 @@
 package usecases;
 
-import entities.City;
 import entities.Country;
 import lombok.Getter;
 import lombok.Setter;
@@ -35,18 +34,7 @@ public class Countries {
 
     @Transactional
     public String createCountry(){
-        City city = new City();
-        city.setName("Mazeikiai");
-        List<City> cities = new ArrayList<City>();
-        cities.add(city);
-
-        countryToCreate.setCities(cities);
-
         this.countriesDAO.persist(countryToCreate);
         return "success";
-    }
-
-    public List<City> getCities(){
-        return countriesDAO.getCities();
     }
 }

@@ -2,7 +2,6 @@ package usecases;
 
 import entities.City;
 import entities.Country;
-import interceptors.LoggedInvocation;
 import lombok.Getter;
 import lombok.Setter;
 import persistence.CitiesDAO;
@@ -39,14 +38,14 @@ public class CitiesInCountry implements Serializable {
     }
 
     @Transactional
-    @LoggedInvocation
     public String createCity() {
-        if(cityToCreate.getName().equals("Vilnius")){
-            cityToCreate.setAsCapital();
-        }
-
         cityToCreate.setCountry(this.country);
         citiesDAO.persist(cityToCreate);
+
+        if(country.getCities().isEmpty()){
+            countriesDAO.updateCapital(cityToCreate);
+        }
+
         return "cities?faces-redirect=true&countryId=" + this.country.getId();
     }
 }
