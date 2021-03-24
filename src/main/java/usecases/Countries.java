@@ -35,6 +35,6 @@ public class Countries {
     @Transactional
     public String createCountry(){
         this.countriesDAO.persist(countryToCreate);
-        return "success";
+        return "index?faces-redirect=true";
     }
 }

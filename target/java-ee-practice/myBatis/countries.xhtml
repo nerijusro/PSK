@@ -8,14 +8,14 @@
 <h:body>
     <h2>Countries:</h2>
     <ol>
-        <ui:repeat value="#{countries.allCountries}" var="country">
+        <ui:repeat value="#{countriesMyBatis.allCountries}" var="country">
             <li><h:link value="#{country.name}" outcome="cities?countryId=#{country.id}" /></li>
         </ui:repeat>
     </ol>
     <h:form>
-        <h:inputText value="#{countries.countryToCreate.name}" required="true" />
-        <h:commandButton value="Add new country" action="#{countries.createCountry}" />
+        <h:inputText value="#{countriesMyBatis.countryToCreate.name}" required="true" />
+        <h:commandButton value="Add new country" action="#{countriesMyBatis.createCountry}" />
     </h:form>
-    <h:link outcome="myBatis/countries" value="MyBatis implementation"/>
+    <h:link value="Back to index" outcome="index"/>
 </h:body>
 </html>

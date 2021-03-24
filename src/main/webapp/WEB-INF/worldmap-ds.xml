@@ -1,7 +1,7 @@
 <datasources>
     <datasource jndi-name="wm1DataSource" pool-name="wm1DataSource">
         <driver>h2</driver>
-        <connection-url>jdbc:h2:~/h2database/wm9DB;AUTO_SERVER=TRUE</connection-url>
+        <connection-url>jdbc:h2:~/h2database/wm12DB;AUTO_SERVER=TRUE</connection-url>
         <security>
             <user-name>sa</user-name>
             <password>sa</password>
