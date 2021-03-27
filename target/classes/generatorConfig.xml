@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE generatorConfiguration
-        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        PUBLIC "-//mif.mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
         "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
 
 <generatorConfiguration>
@@ -11,10 +11,10 @@
                         password="sa">
         </jdbcConnection>
 
-        <javaModelGenerator targetPackage="mybatis.model" targetProject="MAVEN" />
+        <javaModelGenerator targetPackage="mif.mybatis.model" targetProject="MAVEN" />
 
-        <sqlMapGenerator targetPackage="mybatis.xml" targetProject="MAVEN" />
-        <javaClientGenerator type="XMLMAPPER" targetPackage="mybatis.dao" targetProject="MAVEN" />
+        <sqlMapGenerator targetPackage="mif.mybatis.xml" targetProject="MAVEN" />
+        <javaClientGenerator type="XMLMAPPER" targetPackage="mif.mybatis.dao" targetProject="MAVEN" />
 
 
         <table schema="public" tableName="country">
