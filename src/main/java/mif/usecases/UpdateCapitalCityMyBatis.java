@@ -9,20 +9,25 @@ import mif.mybatis.model.Country;
 import mif.utils.CityMapperUtils;
 
 import javax.annotation.PostConstruct;
-import javax.enterprise.inject.Model;
 import javax.faces.context.FacesContext;
+import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
+import javax.inject.Named;
 import javax.transaction.Transactional;
+import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
-@Model
-public class CitiesInCountryMyBatis {
-    @Inject
-    private CityMapper cityMapper;
+@ViewScoped
+@Named
+@Getter @Setter
+public class UpdateCapitalCityMyBatis implements Serializable {
 
     @Inject
     private CountryMapper countryMapper;
+
+    @Inject
+    private CityMapper cityMapper;
 
     @Getter @Setter
     private Country country;
@@ -31,7 +36,7 @@ public class CitiesInCountryMyBatis {
     private List<City> cities;
 
     @Getter @Setter
-    private City cityToCreate = new City();
+    private City newCapitalCity = new City();
 
     @PostConstruct
     public void init() {
@@ -44,18 +49,21 @@ public class CitiesInCountryMyBatis {
     }
 
     @Transactional
-    public String createCity() {
-        cityToCreate.setCountryId(this.country.getId());
-        cityToCreate.setIsCapital(false);
-        int cityId = cityMapper.insert(cityToCreate);
-
-        if(country.getCapitalcityId() == null){
-            cityToCreate.setIsCapital(true);
-            country.setCapitalcityId(cityId);
-
-            cityMapper.updateByPrimaryKey(cityToCreate);
-            countryMapper.updateByPrimaryKey(country);
+    public String updateCapitalCity(){
+        if (newCapitalCity == null){
+            return "updateCapital?faces-redirect=true&countryId=" + this.country.getId();
         }
+
+        City oldCapital = cityMapper.selectByPrimaryKey(country.getCapitalcityId());
+        oldCapital.setIsCapital(false);
+
+        newCapitalCity.setIsCapital(true);
+
+        country.setCapitalcityId(newCapitalCity.getId());
+
+        cityMapper.updateByPrimaryKey(oldCapital);
+        cityMapper.updateByPrimaryKey(newCapitalCity);
+        countryMapper.updateByPrimaryKey(country);
 
         return "cities?faces-redirect=true&countryId=" + this.country.getId();
     }

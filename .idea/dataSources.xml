@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="wm14DB" uuid="24a99766-ec8d-42d7-be86-b04d68db87b5">
+    <data-source source="LOCAL" name="wm15DB" uuid="7fbe3a87-7428-427d-9de1-359ecad6a439">
       <driver-ref>h2.unified</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.h2.Driver</jdbc-driver>
-      <jdbc-url>jdbc:h2:~/h2database/wm14DB;AUTO_SERVER=TRUE</jdbc-url>
+      <jdbc-url>jdbc:h2:~/h2database/wm15DB;AUTO_SERVER=TRUE</jdbc-url>
     </data-source>
   </component>
 </project>
