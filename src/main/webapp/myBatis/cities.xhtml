@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:f="http://java.sun.com/jsf/core">
+<h:head/>
+<h:body>
+    <h2>Cities of #{citiesInCountryMyBatis.country.name} (MyBatis):</h2>
+    <ol>
+        <ui:repeat value="#{citiesInCountryMyBatis.cities}" var="city">
+            <li>
+                <h:outputText value="#{city.name}"/>
+                <b><h:outputText value="#{city.isCapital ? ' (Capital city)' : ''}" /></b>
+            </li>
+        </ui:repeat>
+    </ol>
+
+    <h:form>
+        <h:inputText a:placeholder="name" value="#{citiesInCountryMyBatis.cityToCreate.name}" required="true" />
+        <h:commandButton value="Add city to the country" action="#{citiesInCountryMyBatis.createCity}" >
+            <f:param name="countryId" value="#{citiesInCountryMyBatis.country.id}" />
+        </h:commandButton><br/>
+
+        <!--<h:link outcome="updateCapital?countryId=#{citiesInCountry.country.id}" value="Update capital city"/><br/>
+        <h:link outcome="neighbours?countryId=#{citiesInCountry.country.id}" value="Neighbouring countries"/><br/>-->
+
+        <h:link outcome="countries" value="Back to countries page"/>
+    </h:form>
+</h:body>
+</html>

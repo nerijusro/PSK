@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE configuration
-        PUBLIC "-//mif.mybatis.org//DTD Config 3.0//EN"
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
     <typeAliases>
         <typeAlias type="mif.mybatis.model.Country" alias="Country"/>
+        <typeAlias type="mif.mybatis.model.City" alias="City"/>
     </typeAliases>
     <environments default="development">
         <environment id="development">
@@ -16,5 +17,6 @@
     </environments>
     <mappers>
         <mapper resource="mybatis.xml/CountryMapper.xml"/>
+        <mapper resource="mybatis.xml/CityMapper.xml"/>
     </mappers>
 </configuration>

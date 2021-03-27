@@ -6,7 +6,7 @@
 >
 <h:head/>
 <h:body>
-    <h2>Countries:</h2>
+    <h2>Countries (JPA):</h2>
     <ol>
         <ui:repeat value="#{countries.allCountries}" var="country">
             <li><h:link value="#{country.name}" outcome="cities?countryId=#{country.id}" /></li>
@@ -16,6 +16,6 @@
         <h:inputText value="#{countries.countryToCreate.name}" required="true" />
         <h:commandButton value="Add new country" action="#{countries.createCountry}" />
     </h:form>
-    <h:link outcome="countries" value="MyBatis implementation"/>
+    <h:link outcome="myBatis/countries" value="MyBatis implementation"/>
 </h:body>
 </html>

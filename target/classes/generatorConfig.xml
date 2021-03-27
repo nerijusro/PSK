@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE generatorConfiguration
-        PUBLIC "-//mif.mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
         "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
 
 <generatorConfiguration>
     <context id="MapDB" targetRuntime="MyBatis3Simple">
         <jdbcConnection driverClass="org.h2.Driver"
-                        connectionURL="jdbc:h2:~/h2database/wm12DB;AUTO_SERVER=TRUE"
+                        connectionURL="jdbc:h2:~/h2database/wm15DB;AUTO_SERVER=TRUE"
                         userId="sa"
                         password="sa">
         </jdbcConnection>
@@ -18,6 +18,9 @@
 
 
         <table schema="public" tableName="country">
+            <generatedKey column="id" identity="true" sqlStatement="JDBC" />
+        </table>
+        <table schema="public" tableName="city">
             <generatedKey column="id" identity="true" sqlStatement="JDBC" />
         </table>
     </context>
