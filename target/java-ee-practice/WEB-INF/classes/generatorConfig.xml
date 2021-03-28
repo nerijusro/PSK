@@ -6,7 +6,7 @@
 <generatorConfiguration>
     <context id="MapDB" targetRuntime="MyBatis3Simple">
         <jdbcConnection driverClass="org.h2.Driver"
-                        connectionURL="jdbc:h2:~/h2database/wm15DB;AUTO_SERVER=TRUE"
+                        connectionURL="jdbc:h2:~/h2database/wm17DB;AUTO_SERVER=TRUE"
                         userId="sa"
                         password="sa">
         </jdbcConnection>

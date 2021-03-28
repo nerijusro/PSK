@@ -46,4 +46,6 @@ public interface CountryMapper {
      * @mbg.generated Sat Mar 27 15:21:20 EET 2021
      */
     int updateByPrimaryKey(Country record);
+
+    List<Country> selectNeighbours();
 }

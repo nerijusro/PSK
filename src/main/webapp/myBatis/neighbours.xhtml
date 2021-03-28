@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core">
+<h:head/>
+<h:body>
+    <h:form>
+        <h2>Neighbouring countries of #{manageNeighbouringCountriesMyBatis.countryToManage.name} (MyBatis):</h2>
+
+        <h:selectOneMenu value="#{manageNeighbouringCountriesMyBatis.newNeighbour}" converter="omnifaces.SelectItemsConverter">
+            <f:selectItems value="#{manageNeighbouringCountriesMyBatis.countries}" var="country" itemLabel="#{country.name}"/>
+        </h:selectOneMenu>
+
+        <ol>
+            <ui:repeat value="#{manageNeighbouringCountriesMyBatis.countryToManage.neighbours}" var="neighbour">
+                <li>
+                    <h:outputText value="#{neighbour.name}"/>
+                </li>
+            </ui:repeat>
+        </ol>
+
+        <br/><h:link outcome="countries" value="Back to countries page"/>
+    </h:form>
+</h:body>
+</html>

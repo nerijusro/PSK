@@ -10,6 +10,12 @@
     <id column="ID" jdbcType="INTEGER" property="id" />
     <result column="NAME" jdbcType="VARCHAR" property="name" />
     <result column="CAPITALCITY_ID" jdbcType="INTEGER" property="capitalcityId" />
+
+    <!-- Manually added for ManyToMany -->
+    <!-- Nested select (N+1 select problem) -->
+    <collection property="neighbours" javaType="ArrayList"
+                ofType="Country" column="id"
+                select="selectNeighbours"/>
   </resultMap>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     <!--
@@ -59,4 +65,11 @@
     select ID, NAME, CAPITALCITY_ID
     from PUBLIC.COUNTRY
   </select>
+  <!-- Manually added for ManyToMany -->
+  <select id="selectNeighbours" resultType="Country">
+    SELECT *
+    FROM public.COUNTRY c
+        JOIN public.NEIGHBOURS n on c.ID = n.COUNTRY_ID
+    WHERE n.NEIGHBOURS_ID = #{id,jdbcType=INTEGER}
+</select>
 </mapper>
