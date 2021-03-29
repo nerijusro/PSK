@@ -6,6 +6,7 @@
     <typeAliases>
         <typeAlias type="mif.mybatis.model.Country" alias="Country"/>
         <typeAlias type="mif.mybatis.model.City" alias="City"/>
+        <typeAlias type="mif.mybatis.model.Neighbours" alias="Neighbours"/>
     </typeAliases>
     <environments default="development">
         <environment id="development">
@@ -18,5 +19,6 @@
     <mappers>
         <mapper resource="mybatis.xml/CountryMapper.xml"/>
         <mapper resource="mybatis.xml/CityMapper.xml"/>
+        <mapper resource="mybatis.xml/NeighboursMapper.xml"/>
     </mappers>
 </configuration>

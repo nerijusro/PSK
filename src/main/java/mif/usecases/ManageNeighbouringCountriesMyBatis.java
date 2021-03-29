@@ -3,22 +3,30 @@ package mif.usecases;
 import lombok.Getter;
 import lombok.Setter;
 import mif.mybatis.dao.CountryMapper;
+import mif.mybatis.dao.NeighboursMapper;
 import mif.mybatis.model.Country;
+import mif.mybatis.model.Neighbours;
 
 import javax.annotation.PostConstruct;
-import javax.enterprise.inject.Model;
 import javax.faces.context.FacesContext;
+import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
+import javax.inject.Named;
 import javax.transaction.Transactional;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-@Model
+@ViewScoped
+@Named
+@Getter @Setter
 public class ManageNeighbouringCountriesMyBatis implements Serializable {
     @Inject
     private CountryMapper countryMapper;
+
+    @Inject
+    private NeighboursMapper neighboursMapper;
 
     @Getter @Setter
     private Country countryToManage;
@@ -38,24 +46,23 @@ public class ManageNeighbouringCountriesMyBatis implements Serializable {
         loadValidCountries();
     }
 
-//    @Transactional
-//    public String addNewNeighbour(){
-//        if (newNeighbour == null){
-//            return "neighbours?faces-redirect=true&countryId=" + this.countryToManage.getId();
-//        }
-//
-//        List<Country> neighbouringCountries = countryToManage.getNeighbours();
-//        neighbouringCountries.add(newNeighbour);
-//        countryToManage.setNeighbours(neighbouringCountries);
-//
-//        neighbouringCountries = newNeighbour.getNeighbours();
-//        neighbouringCountries.add(countryToManage);
-//        newNeighbour.setNeighbours(neighbouringCountries);
-//
-//        countriesDAO.merge(countryToManage);
-//        countriesDAO.merge(newNeighbour);
-//        return "neighbours?faces-redirect=true&countryId=" + this.countryToManage.getId();
-//    }
+    @Transactional
+    public String addNewNeighbour(){
+        if (newNeighbour == null){
+            return "neighbours?faces-redirect=true&countryId=" + this.countryToManage.getId();
+        }
+
+        Neighbours neighbours = new Neighbours();
+        neighbours.setCountryId(countryToManage.getId());
+        neighbours.setNeighboursId(newNeighbour.getId());
+        neighboursMapper.insert(neighbours);
+
+        neighbours.setCountryId(newNeighbour.getId());
+        neighbours.setNeighboursId(countryToManage.getId());
+        neighboursMapper.insert(neighbours);
+
+        return "neighbours?faces-redirect=true&countryId=" + this.countryToManage.getId();
+    }
 
     public void loadValidCountries() {
         this.countries = countryMapper.selectAll();

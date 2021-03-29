@@ -13,6 +13,10 @@
             <f:selectItems value="#{manageNeighbouringCountriesMyBatis.countries}" var="country" itemLabel="#{country.name}"/>
         </h:selectOneMenu>
 
+        <h:commandButton value="Add new neighbour" action="#{manageNeighbouringCountriesMyBatis.addNewNeighbour}">
+            <f:param name="countryId" value="#{manageNeighbouringCountriesMyBatis.countryToManage.id}" />
+        </h:commandButton><br/>
+
         <ol>
             <ui:repeat value="#{manageNeighbouringCountriesMyBatis.countryToManage.neighbours}" var="neighbour">
                 <li>
