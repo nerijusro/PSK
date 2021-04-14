@@ -8,14 +8,14 @@
     <h:form>
         <h2>New Capital City of #{updateCapitalCity.country.name}:</h2>
         <h:selectOneMenu value="#{updateCapitalCity.newCapitalCity}" converter="omnifaces.SelectItemsConverter">
-            <f:selectItems value="#{citiesInCountry.country.cities}" var="city" itemLabel="#{city.name}"/>
+            <f:selectItems value="#{countryInfo.country.cities}" var="city" itemLabel="#{city.name}"/>
         </h:selectOneMenu>
 
         <h:commandButton value="Update Capital City" action="#{updateCapitalCity.updateCapitalCity}">
             <f:param name="countryId" value="#{updateCapitalCity.country.id}" />
         </h:commandButton><br/>
 
-    <br/><h:link outcome="cities?countryId=#{updateCapitalCity.country.id}" value="Back to #{updateCapitalCity.country.name} page"/>
+    <br/><h:link outcome="countryInfo?countryId=#{updateCapitalCity.country.id}" value="Back to #{updateCapitalCity.country.name} page"/>
     </h:form>
 </h:body>
 </html>

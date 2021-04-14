@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:f="http://java.sun.com/jsf/core">
+<h:head/>
+<h:body>
+    <h2>#{countryInfo.country.name}'s (Population: #{countryInfo.country.population != null ? countryInfo.country.population : ' Uknown'}) cities:</h2>
+    <ol>
+        <ui:repeat value="#{countryInfo.country.cities}" var="city">
+            <li>
+                <h:outputText value="#{city.name}"/>
+                <b><h:outputText value="#{city.capital ? ' (Capital city)' : ''}" /></b>
+            </li>
+        </ui:repeat>
+    </ol>
+
+    <h:form>
+        <h:inputText a:placeholder="name" value="#{countryInfo.cityToCreate.name}" required="true" />
+        <h:commandButton value="Add city to the country" action="#{countryInfo.createCity}" >
+            <f:param name="countryId" value="#{countryInfo.country.id}" />
+        </h:commandButton><br/>
+
+        <h:link outcome="updatePopulation?countryId=#{countryInfo.country.id}" value="Update population"/><br/>
+        <h:link outcome="updateCapital?countryId=#{countryInfo.country.id}" value="Update capital city"/><br/>
+        <h:link outcome="neighbours?countryId=#{countryInfo.country.id}" value="Neighbouring countries"/><br/>
+
+        <h:link outcome="index" value="Back to countries page"/>
+    </h:form>
+</h:body>
+</html>

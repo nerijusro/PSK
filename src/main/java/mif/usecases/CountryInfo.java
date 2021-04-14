@@ -10,13 +10,18 @@ import mif.persistence.CountriesDAO;
 import javax.annotation.PostConstruct;
 import javax.enterprise.inject.Model;
 import javax.faces.context.FacesContext;
+import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
+import javax.inject.Named;
+import javax.persistence.OptimisticLockException;
 import javax.transaction.Transactional;
 import java.io.Serializable;
 import java.util.Map;
 
-@Model
-public class CitiesInCountry {
+@ViewScoped
+@Named
+@Getter @Setter
+public class CountryInfo implements Serializable{
     @Inject
     private CitiesDAO citiesDAO;
 
@@ -46,6 +51,16 @@ public class CitiesInCountry {
             countriesDAO.updateCapital(cityToCreate);
         }
 
-        return "cities?faces-redirect=true&countryId=" + this.country.getId();
+        return "countryInfo?faces-redirect=true&countryId=" + this.country.getId();
+    }
+
+    @Transactional
+    public String updatePopulation() {
+        try{
+            countriesDAO.merge(this.country);
+        } catch (OptimisticLockException e) {
+            return "/updatePopulation.xhtml?faces-redirect=true&countryId=" + this.country.getId() + "&error=optimistic-lock-exception";
+        }
+        return "countryInfo.xhtml?countryId=" + this.country.getId() + "&faces-redirect=true";
     }
 }

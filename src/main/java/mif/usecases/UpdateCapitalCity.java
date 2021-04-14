@@ -44,6 +44,6 @@ public class UpdateCapitalCity implements Serializable {
         }
 
         countriesDAO.updateCapital(newCapitalCity);
-        return "cities?faces-redirect=true&countryId=" + this.country.getId();
+        return "countryInfo?faces-redirect=true&countryId=" + this.country.getId();
     }
 }

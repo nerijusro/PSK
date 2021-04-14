@@ -25,18 +25,25 @@ public class Country {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-
+    @Column(name = "NAME")
     private String name;
+
+    @Column(name = "POPULATION")
+    private Integer population;
+
+    @OneToOne
+    private City capitalCity;
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "country")
+    private List<City> cities = new ArrayList<>();
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "NEIGHBOURS")
     private List<Country> neighbours = new ArrayList<>();
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "country")
-    private List<City> cities = new ArrayList<>();
-
-    @OneToOne
-    private City capitalCity;
+    @Version
+    @Column(name = "OPT_LOCK_VERSION")
+    private Integer version;
 
     @Override
     public boolean equals(Object o) {

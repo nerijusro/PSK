@@ -9,7 +9,7 @@
     <h2>Countries:</h2>
     <ol>
         <ui:repeat value="#{countries.allCountries}" var="country">
-            <li><h:link value="#{country.name}" outcome="cities?countryId=#{country.id}" /></li>
+            <li><h:link value="#{country.name}" outcome="countryInfo?countryId=#{country.id}" /></li>
         </ui:repeat>
     </ol>
     <h:form>
