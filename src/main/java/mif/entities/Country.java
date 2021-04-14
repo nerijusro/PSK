@@ -26,7 +26,7 @@ public class Country {
     private Integer id;
 
 
-    private String country_name;
+    private String name;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "NEIGHBOURS",

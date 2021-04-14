@@ -1,5 +1,10 @@
 package mif.mybatis.model;
 
+//Final commit for the first assignment.
+//Following commits will be dedicated to meeting second assignment requirements.
+//
+//With Love,
+//Nerijus
 public class City {
     private Country country;
 
