@@ -4,19 +4,21 @@ import mif.mybatis.dao.CityMapper;
 import mif.mybatis.model.City;
 import mif.mybatis.model.Country;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class CityMapperUtils {
 
     public static List<City> loadCities(CityMapper cityMapper, Country country){
-        List<City> cities = cityMapper.selectAll();
+        List<City> allCities = cityMapper.selectAll();
+        List<City> filteredCities = new ArrayList<City>();
 
-        for (City city : cities) {
-            if(city.getCountryId() != country.getId()){
-                cities.remove(city);
+        for (City city : allCities) {
+            if(city.getCountryId() == country.getId()){
+                filteredCities.add(city);
             }
         }
 
-        return cities;
+        return filteredCities;
     }
 }

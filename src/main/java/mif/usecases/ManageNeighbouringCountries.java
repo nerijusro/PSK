@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Map;
 
 @Model
-public class ManageNeighbouringCountries implements Serializable {
+public class ManageNeighbouringCountries {
     @Getter @Setter
     private Country countryToManage;
 

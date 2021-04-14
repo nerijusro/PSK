@@ -25,10 +25,13 @@ public class Country {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    private String name;
+
+    private String country_name;
 
     @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "NEIGHBOURS")
+    @JoinTable(name = "NEIGHBOURS",
+            joinColumns={@JoinColumn(name="country_id", referencedColumnName="id")},
+            inverseJoinColumns={@JoinColumn(name="neighbours_id", referencedColumnName="id")})
     private List<Country> neighbours = new ArrayList<>();
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "country")

@@ -16,7 +16,7 @@ import java.io.Serializable;
 import java.util.Map;
 
 @Model
-public class CitiesInCountry implements Serializable {
+public class CitiesInCountry {
     @Inject
     private CitiesDAO citiesDAO;
 
