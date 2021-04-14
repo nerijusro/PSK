@@ -7,7 +7,7 @@
 <h:head/>
 <h:body>
     <h:form>
-        <h2>Neighbouring countries of #{manageNeighbouringCountries.countryToManage.name} (JPA):</h2>
+        <h2>Neighbouring countries of #{manageNeighbouringCountries.countryToManage.name}:</h2>
 
         <h:selectOneMenu value="#{manageNeighbouringCountries.newNeighbour}" converter="omnifaces.SelectItemsConverter">
             <f:selectItems value="#{manageNeighbouringCountries.countries}" var="country" itemLabel="#{country.name}"/>

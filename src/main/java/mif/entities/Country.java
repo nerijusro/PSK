@@ -29,9 +29,7 @@ public class Country {
     private String name;
 
     @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "NEIGHBOURS",
-            joinColumns={@JoinColumn(name="country_id", referencedColumnName="id")},
-            inverseJoinColumns={@JoinColumn(name="neighbours_id", referencedColumnName="id")})
+    @JoinTable(name = "NEIGHBOURS")
     private List<Country> neighbours = new ArrayList<>();
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "country")
