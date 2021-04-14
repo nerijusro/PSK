@@ -4,6 +4,7 @@ import mif.entities.City;
 import mif.entities.Country;
 import lombok.Getter;
 import lombok.Setter;
+import mif.interceptors.LoggedInvocation;
 import mif.persistence.CitiesDAO;
 import mif.persistence.CountriesDAO;
 
@@ -43,6 +44,7 @@ public class CountryInfo implements Serializable{
     }
 
     @Transactional
+    @LoggedInvocation
     public String createCity() {
         cityToCreate.setCountry(this.country);
         citiesDAO.persist(cityToCreate);
@@ -55,6 +57,7 @@ public class CountryInfo implements Serializable{
     }
 
     @Transactional
+    @LoggedInvocation
     public String updatePopulation() {
         try{
             countriesDAO.merge(this.country);
