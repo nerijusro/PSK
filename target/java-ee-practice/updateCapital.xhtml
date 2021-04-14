@@ -15,7 +15,7 @@
             <f:param name="countryId" value="#{updateCapitalCity.country.id}" />
         </h:commandButton><br/>
 
-    <br/><h:link outcome="index" value="Back to countries page"/>
+    <br/><h:link outcome="cities?countryId=#{updateCapitalCity.country.id}" value="Back to #{updateCapitalCity.country.name} page"/>
     </h:form>
 </h:body>
 </html>
