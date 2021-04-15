@@ -1,18 +1,17 @@
 package mif.usecases;
 
-import mif.entities.City;
 import mif.entities.Country;
 import lombok.Getter;
 import lombok.Setter;
-import mif.interceptors.LoggedInvocation;
-import mif.persistence.CitiesDAO;
 import mif.persistence.CountriesDAO;
+import mif.services.OptLockExceptionLogger;
 
 import javax.annotation.PostConstruct;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.persistence.OptimisticLockException;
 import javax.transaction.Transactional;
 import java.io.Serializable;
 import java.util.Map;
@@ -20,18 +19,15 @@ import java.util.Map;
 @ViewScoped
 @Named
 @Getter @Setter
-public class CountryInfo implements Serializable{
-    @Inject
-    private CitiesDAO citiesDAO;
-
+public class UpdatePopulation implements Serializable {
     @Inject
     private CountriesDAO countriesDAO;
 
-    @Getter @Setter
-    private Country country;
+    @Inject
+    private OptLockExceptionLogger exceptionLoggerService;
 
     @Getter @Setter
-    private City cityToCreate = new City();
+    private Country country;
 
     @PostConstruct
     public void init() {
@@ -42,15 +38,14 @@ public class CountryInfo implements Serializable{
     }
 
     @Transactional
-    @LoggedInvocation
-    public String createCity() {
-        cityToCreate.setCountry(this.country);
-        citiesDAO.persist(cityToCreate);
-
-        if(country.getCities().isEmpty()){
-            countriesDAO.updateCapital(cityToCreate);
+    public String updatePopulation() {
+        try{
+            countriesDAO.merge(this.country);
+        } catch (OptimisticLockException e) {
+            exceptionLoggerService.saveExceptionInfo(e);
+            return "/updatePopulation.xhtml?faces-redirect=true&countryId=" + this.country.getId() + "&error=optimistic-lock-exception";
         }
-
-        return "countryInfo?faces-redirect=true&countryId=" + this.country.getId();
+        return "countryInfo.xhtml?countryId=" + this.country.getId() + "&faces-redirect=true";
     }
 }
+

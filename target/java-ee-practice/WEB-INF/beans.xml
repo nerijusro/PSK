@@ -9,4 +9,4 @@
     <interceptors>
         <class>mif.interceptors.MethodLogger</class>
     </interceptors>
-</beans> 
+</beans>

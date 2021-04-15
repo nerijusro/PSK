@@ -49,8 +49,8 @@ public class Country {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Country team = (Country) o;
-        return Objects.equals(name, team.name);
+        Country country = (Country) o;
+        return Objects.equals(name, country.name);
     }
 
     @Override
