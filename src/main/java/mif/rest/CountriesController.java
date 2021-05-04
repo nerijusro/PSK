@@ -5,9 +5,9 @@ import lombok.Setter;
 import mif.entities.City;
 import mif.entities.Country;
 import mif.persistence.CountriesDAO;
-import mif.rest.contracts.AddCountryRequest;
+import mif.rest.contracts.CountryRequestDto;
 import mif.rest.contracts.AddCountryResponse;
-import mif.rest.contracts.GetCountryResponse;
+import mif.rest.contracts.CountryResponseDto;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
@@ -35,7 +35,7 @@ public class CountriesController {
             return Response.status(Response.Status.NOT_FOUND).build();
         }
 
-        GetCountryResponse response = new GetCountryResponse();
+        CountryResponseDto response = new CountryResponseDto();
         List<String> cities = new ArrayList<>();
         List<String> neighbours = new ArrayList<>();
         response.setName(country.getName());
@@ -67,7 +67,7 @@ public class CountriesController {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     @Transactional
-    public Response addCountry(AddCountryRequest request) {
+    public Response addCountry(CountryRequestDto request) {
         if(request.getName() == null){
             return Response.status(Response.Status.BAD_REQUEST).build();
         }
@@ -79,5 +79,27 @@ public class CountriesController {
         response.setId(newCountry.getId());
 
         return Response.ok(response).build();
+    }
+
+    @Path("/updateCountry/{id}")
+    @PUT
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    @Transactional
+    public Response updateCountry(@PathParam("id") final Integer id, CountryRequestDto request) {
+        Country country = countriesDAO.findOne(id);
+        if (country == null) {
+            return Response.status(Response.Status.NOT_FOUND).build();
+        }
+
+        if(request.getName() != null){
+            country.setName(request.getName());
+        }
+        if(request.getPopulation() != null){
+            country.setPopulation(request.getPopulation());
+        }
+
+        countriesDAO.merge(country);
+        return Response.ok(country).build();
     }
 }
