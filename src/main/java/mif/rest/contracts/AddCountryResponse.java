@@ -7,8 +7,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 @Getter @Setter
-public class CountryDto {
-    private String Name;
-    private Integer Population;
-    private String CapitalCity;
+public class AddCountryResponse {
+    private Integer Id;
 }

@@ -21,6 +21,11 @@ public class Country {
     public Country(){
         
     }
+
+    public Country(String name, Integer population){
+        this.name = name;
+        this.population = population;
+    }
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
