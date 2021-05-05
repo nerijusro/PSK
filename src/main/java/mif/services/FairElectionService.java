@@ -2,7 +2,6 @@ package mif.services;
 
 import mif.interfaces.PresidentElectionService;
 
-import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.context.RequestScoped;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;

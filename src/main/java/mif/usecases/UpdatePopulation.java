@@ -3,8 +3,10 @@ package mif.usecases;
 import mif.entities.Country;
 import lombok.Getter;
 import lombok.Setter;
+import mif.interceptors.LoggedInvocation;
 import mif.persistence.CountriesDAO;
 import mif.services.OptLockExceptionLogger;
+import mif.services.PopulationService;
 
 import javax.annotation.PostConstruct;
 import javax.faces.context.FacesContext;
@@ -15,6 +17,8 @@ import javax.persistence.OptimisticLockException;
 import javax.transaction.Transactional;
 import java.io.Serializable;
 import java.util.Map;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
 
 @ViewScoped
 @Named
