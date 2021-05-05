@@ -42,6 +42,12 @@
 
   <dependencies>
     <dependency>
+      <groupId>org.wildfly.quickstarts</groupId>
+      <artifactId>wildfly-ejb-in-ear-common</artifactId>
+      <type>jar</type>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-web</artifactId>
       <version>4.1.6.RELEASE</version>

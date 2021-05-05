@@ -5,6 +5,7 @@ import mif.entities.Country;
 import lombok.Getter;
 import lombok.Setter;
 import mif.interceptors.LoggedInvocation;
+import mif.interfaces.PresidentElectionService;
 import mif.persistence.CitiesDAO;
 import mif.persistence.CountriesDAO;
 

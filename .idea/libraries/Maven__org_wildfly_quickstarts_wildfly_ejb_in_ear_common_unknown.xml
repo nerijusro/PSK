@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: org.wildfly.quickstarts:wildfly-ejb-in-ear-common:unknown">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/wildfly/quickstarts/wildfly-ejb-in-ear-common/unknown/wildfly-ejb-in-ear-common-unknown.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/org/wildfly/quickstarts/wildfly-ejb-in-ear-common/unknown/wildfly-ejb-in-ear-common-unknown-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/wildfly/quickstarts/wildfly-ejb-in-ear-common/unknown/wildfly-ejb-in-ear-common-unknown-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

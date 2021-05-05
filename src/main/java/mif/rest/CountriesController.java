@@ -4,10 +4,9 @@ import lombok.Getter;
 import lombok.Setter;
 import mif.entities.City;
 import mif.entities.Country;
+import mif.interfaces.PresidentElectionService;
 import mif.persistence.CountriesDAO;
-import mif.rest.contracts.CountryRequestDto;
-import mif.rest.contracts.AddCountryResponse;
-import mif.rest.contracts.CountryResponseDto;
+import mif.rest.contracts.*;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
@@ -24,6 +23,9 @@ public class CountriesController {
     @Inject
     @Setter @Getter
     private CountriesDAO countriesDAO;
+
+    @Inject
+    private PresidentElectionService electionService;
 
     @Path("countries/{id}")
     @GET
@@ -101,5 +103,20 @@ public class CountriesController {
 
         countriesDAO.merge(country);
         return Response.ok(country).build();
+    }
+
+    @Path("electPresident/{id}")
+    @GET
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response electPresident(@PathParam("id") final Integer id, ElectPresidentRequest request) {
+        Country country = countriesDAO.findOne(id);
+        if (country == null) {
+            return Response.status(Response.Status.NOT_FOUND).build();
+        }
+
+        GenericResponse response = new GenericResponse();
+        response.setMessage("The new president of "+ country.getName() + " is " + electionService.electPresident(request.getCandidates()));
+        return Response.ok(response).build();
     }
 }
