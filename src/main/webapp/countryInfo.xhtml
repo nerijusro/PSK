@@ -16,7 +16,6 @@
             </li>
         </ui:repeat>
     </ol>
-
     <h:form>
         <h:inputText a:placeholder="name" value="#{countryInfo.cityToCreate.name}" required="true" />
         <h:commandButton value="Add city to the country" action="#{countryInfo.createCity}" >
@@ -28,6 +27,9 @@
         <h:link outcome="neighbours?countryId=#{countryInfo.country.id}" value="Neighbouring countries"/><br/>
 
         <h:link outcome="index" value="Back to countries page"/>
+    </h:form>
+    <h:form>
+        <h2>#{countryInfo.country.name} is a member of: #{countryInfo.internationalOrganizations}</h2>
     </h:form>
 </h:body>
 </html>

@@ -8,8 +8,12 @@
     <interceptors>
         <class>mif.interceptors.MethodLogger</class>
     </interceptors>
-
+    <decorators>
+        <class>mif.decorators.EuropeanUnion</class>
+    </decorators>
     <alternatives>
         <class>mif.services.RiggedElectionService</class>
     </alternatives>
+
+
 </beans>
