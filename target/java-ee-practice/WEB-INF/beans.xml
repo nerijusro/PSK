@@ -10,6 +10,7 @@
     </interceptors>
     <decorators>
         <class>mif.decorators.EuropeanUnion</class>
+        <class>mif.decorators.NATO</class>
     </decorators>
     <alternatives>
         <class>mif.services.RiggedElectionService</class>
